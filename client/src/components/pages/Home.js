@@ -76,11 +76,15 @@ class Home extends React.Component {
                     <div key={item._id}>
                       <div className = "card">
                         <div className="card-header">
-                            Article Title: {item.snippet}
+                          {item.headline.main}
                         </div>
                           <div className="card-body">
-                            <p className="card-title">Article Date: {item.pub_date}</p>
-                              <p className="card-text"><a href={item.web_url} target="_blank">Article Link</a></p>
+                            <p className="card-title">Publish Date: {item.pub_date}</p>
+                              <p className="card-text">
+                              {item.snippet}
+                              </p>
+                              <p className="card-text"><a href={item.web_url} target="_blank">Article Link</a>
+                              </p>
                                 <a href="/savedArticles" className="btn btn-primary">Save Article</a>
                           </div>
                       </div>
