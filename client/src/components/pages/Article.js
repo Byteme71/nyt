@@ -1,54 +1,69 @@
 import React from "react";
 import axios from "axios";
 
-class Nytreact extends React.Component {
+class Article extends React.Component {
   state = {
-    articlesToSave: {
-      title: "",
-      date: "",
-      url: ""
-    }
+    articlesToSave:[]
   };
 
   componentDidMount() {
-    // grab the id (upc) from the url
-    // because this is a stateful component, we must use "this.props"
-    axios.get(`/api/srticles/${this.props.match.params.id}`).then((response) => {
+
+    axios.get(`/api/articles/`).then((response) => {
+
+      console.log(response.data);
+
+
       this.setState({
-        item: response.data
-      });
+            articlesToSave: response.data
+      })
     });
   }
 
-  buyOne = () => {
-    // make a put request to subtract one from quantity
-    axios.put(`/api/Nytreacts/${this.props.match.params.id}`).then((response) => {
-      // update state object with newest data
-      this.setState({
-        item: response.data
-      });
-    });
-  };
+  // buyOne = () => {
+  //   // make a put request to subtract one from quantity
+  //   axios.put(`/api/Nytreacts/${this.props.match.params.id}`).then((response) => {
+  //     // update state object with newest data
+  //     this.setState({
+  //       item: response.data
+  //     });
+  //   });
+  // };
 
   render() {
     return (
-      <div className="card">
-        <div className="card-header">{this.state.item.name}</div>
-        <div className="card-body">
-          <p>{this.state.item.description}</p>
-          <p>Qty: {this.state.item.quantity}</p>
+      <div>
+          <div className="row">
+          <div className="col-md-12">
+          {this.state.articlesToSave.map(item =>{
 
-          <button 
-            className="btn btn-outline-primary btn-sm" 
-            onClick={this.buyOne}
-            disabled={this.state.item.quantity <= 0}
-          >
-            Buy One
-          </button>
-        </div>
+        return (
+                    <div key={item._id}>
+                      <div className = "card">
+                        <div className="card-header">
+                          {item.title}
+                        </div>
+                          <div className="card-body">
+                            <p className="card-title">Publish Date: {item.date}</p>
+                              <p className="card-text">
+                              {item.snippet}
+                              </p>
+                              <p className="card-text"><a href={item.url} target="_blank">Article Link</a>
+                              </p>
+                                <a href="/savedArticles" className="btn btn-primary">Delete Article</a>
+                          </div>
+                      </div>
+                    <br>
+                    </br>
+                    </div>
+                  ) 
+
+
+          })}
+          </div>
+          </div>
       </div>
     );
   }
 }
 
-export default Nytreact;
+export default Article;

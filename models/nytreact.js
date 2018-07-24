@@ -10,6 +10,10 @@ const nytreactSchema = new Schema({
     type: Date,
     required: true
   },
+  snippet:{
+    type: String,
+    required: true
+  },
   url: {
     type: String,
     required: true

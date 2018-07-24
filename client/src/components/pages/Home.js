@@ -8,6 +8,7 @@ class Home extends React.Component {
     articlesToSave:{
       title: "",
       date: "",
+      snippet:"",
       url: ""
     }
   };
@@ -62,6 +63,7 @@ class Home extends React.Component {
       articlesToSave:{
       title: articleToDb.headline.main,
       date: articleToDb.pub_date,
+      snippet: articleToDb.snippet,
       url: articleToDb.web_url
       }
     },()=> {
