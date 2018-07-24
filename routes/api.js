@@ -1,8 +1,8 @@
 const router = require("express").Router();
-const Article = require("../models/nytreact.js");
+const Nytreact = require("../models/nytreact.js");
 
 router.post("/api/article", function (req, res) {
-  Article.create(req.body)
+  Nytreact.create(req.body)
   .then(() => {
     res.json(true);
   })
@@ -13,7 +13,7 @@ router.post("/api/article", function (req, res) {
 
 
 router.get("/api/articles", function (req, res) {
-  Article.find({
+  Nytreact.find({
   })
   .then((docs) => {
     res.json(docs);
@@ -33,7 +33,7 @@ router.get("/api/articles", function (req, res) {
 
 router.delete("/api/articles/:id", function (req, res) {
   console.log("are we getting into the backend delete route")
-  Article.findOneAndDelete({
+  Nytreact.findOneAndDelete({
     _id: req.params.id
   })
     .then((docs) => {
