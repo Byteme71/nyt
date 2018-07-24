@@ -3,13 +3,17 @@ import axios from "axios";
 
 class Nytreact extends React.Component {
   state = {
-    item: {}
+    articlesToSave: {
+      title: "",
+      date: "",
+      url: ""
+    }
   };
 
   componentDidMount() {
     // grab the id (upc) from the url
     // because this is a stateful component, we must use "this.props"
-    axios.get(`/api/Nytreacts/${this.props.match.params.id}`).then((response) => {
+    axios.get(`/api/srticles/${this.props.match.params.id}`).then((response) => {
       this.setState({
         item: response.data
       });

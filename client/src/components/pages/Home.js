@@ -4,7 +4,12 @@ import axios from "axios";
 class Home extends React.Component {
   // initial form state
   state = {
-    articles: []
+    articles: [],
+    articlesToSave:{
+      title: "",
+      date: "",
+      url: ""
+    }
   };
 
   // styles = {
@@ -20,11 +25,10 @@ class Home extends React.Component {
 
   submitNytreact = (event) => {
     event.preventDefault();
- console.log("is this happening")
+//  console.log("is this happening")
     // send the entire state object to the back-end
     axios.get(`https://api.nytimes.com/svc/search/v2/articlesearch.json?api-key=fc0296d021eb41eea4234990749bd552&query=${this.state.name}`).then(response => {
       // console.log("these are the results", response.data.response.docs)
-
       this.setState({
         articles:[]
       })
@@ -35,18 +39,42 @@ class Home extends React.Component {
           articles: response.data.response.docs
         });
         // console.log("are these the articles", this.state.articles)
-
       }
     });
   };
 
+  saveArticles = id => {
 
-// displayArticles = (event) => {
+  let articlesNew = this.state.articles.filter(article => article._id === id);
+  let articleToDb = articlesNew[0];
+    // Set this.state.friends equal to the new friends array
+  console.log("is this being filtered or na", articlesNew[0]);
 
+  console.log("is this the correct variable or NOT", articleToDb);
 
-// }
+  console.log("NOPPPPEEEEEEEE", articleToDb.headline.main);
 
-  
+  console.log("YEPPPPP", articleToDb.pub_date);
+
+   console.log("FIREEEEE", articleToDb.web_url);
+
+    this.setState({
+      articlesToSave:{
+      title: articleToDb.headline.main,
+      date: articleToDb.pub_date,
+      url: articleToDb.web_url
+      }
+    },()=> {
+      axios.post("/api/article", this.state.articlesToSave).then(response=>{
+        if (response){
+          console.log("article saved")
+        }
+      }).catch(err=>{
+        console.log("error", err)
+      }) 
+    })
+  }
+
   render() {
     return (
       <div>
@@ -85,7 +113,7 @@ class Home extends React.Component {
                               </p>
                               <p className="card-text"><a href={item.web_url} target="_blank">Article Link</a>
                               </p>
-                                <a href="/savedArticles" className="btn btn-primary">Save Article</a>
+                                <a href="/savedArticles" className="btn btn-primary" onClick={() => this.saveArticles(item._id)}>Save Article</a>
                           </div>
                       </div>
                     <br>

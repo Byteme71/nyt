@@ -9,7 +9,7 @@ class Home extends React.Component {
 
   componentDidMount() {
     // after component loads, get all products from db
-    axios.get("/api/Nytreacts").then((response) => {
+    axios.get("/api/articles").then((response) => {
       this.setState({
         results: response.data
       });
