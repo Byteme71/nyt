@@ -21,20 +21,21 @@ router.get("/api/articles", function (req, res) {
 });
 
 
-router.get("/api/savedArticles/:url", function (req, res) {
-  Article.findOne({
-    url: req.params.url
+// router.get("/api/articles/:url", function (req, res) {
+//   Article.findOne({
+//     url: req.params.url
+//   })
+//   .then((docs) => {
+//     res.json(docs);
+//   });
+// });
+
+
+router.delete("/api/articles/:id", function (req, res) {
+  console.log("are we getting into the backend delete route")
+  Article.findOneAndDelete({
+    _id: req.params.id
   })
-  .then((docs) => {
-    res.json(docs);
-  });
-});
-
-
-router.delete("/api/savedArticles/:url", function (req, res) {
-  Article.deleteOne({
-      url: req.params.url
-    })
     .then((docs) => {
       res.json(docs);
     });

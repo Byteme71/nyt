@@ -19,15 +19,20 @@ class Article extends React.Component {
     });
   }
 
-  // buyOne = () => {
-  //   // make a put request to subtract one from quantity
-  //   axios.put(`/api/Nytreacts/${this.props.match.params.id}`).then((response) => {
-  //     // update state object with newest data
-  //     this.setState({
-  //       item: response.data
-  //     });
-  //   });
-  // };
+  deleteArticle = (id) => {
+
+    console.log("getting here or ?!")
+    
+    console.log("what is this id?!?!?!?!?!!?!?!?!", id)
+
+    axios.delete(`/api/articles/${id}`).then((response) => {
+
+        console.log("is this reeeeeeeeeeeeeeally the id",id)
+      // this.setState({
+      //   item: response.data
+      // });
+    });
+  };
 
   render() {
     return (
@@ -49,7 +54,7 @@ class Article extends React.Component {
                               </p>
                               <p className="card-text"><a href={item.url} target="_blank">Article Link</a>
                               </p>
-                                <a href="/savedArticles" className="btn btn-primary">Delete Article</a>
+                                <a href="/savedArticles" className="btn btn-primary" onClick={() => this.deleteArticle(item._id)}>Delete Article</a>
                           </div>
                       </div>
                     <br>
