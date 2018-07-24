@@ -113,9 +113,9 @@ class Home extends React.Component {
                               <p className="card-text">
                               {item.snippet}
                               </p>
-                              <p className="card-text"><a href={item.web_url} target="_blank">Article Link</a>
+                              <p className="card-text"><a href={item.web_url} target="_blank">Read the article here!</a>
                               </p>
-                                <a href="/savedArticles" className="btn btn-primary" onClick={() => this.saveArticles(item._id)}>Save Article</a>
+                                <a href="/savedArticles" className="btn btn-outline-success" onClick={() => this.saveArticles(item._id)}>Save Article</a>
                           </div>
                       </div>
                     <br>

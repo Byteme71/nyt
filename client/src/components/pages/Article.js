@@ -54,7 +54,7 @@ class Article extends React.Component {
                               </p>
                               <p className="card-text"><a href={item.url} target="_blank">Article Link</a>
                               </p>
-                                <a href="/savedArticles" className="btn btn-primary" onClick={() => this.deleteArticle(item._id)}>Delete Article</a>
+                                <a href="/savedArticles" className="btn btn-outline-danger" onClick={() => this.deleteArticle(item._id)}>Delete Article</a>
                           </div>
                       </div>
                     <br>
